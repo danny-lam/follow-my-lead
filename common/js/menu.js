@@ -53,6 +53,7 @@ var menu = {
         start_btn_txt = game.add.text((gameX+5), (gameY+3), 'START', btn_style);
         start_btn_txt.anchor.set(0.5);
         start_btn.my_txt = start_btn_txt; //link this txt to this btn
+        start_btn.my_state = 'Play';
         
         start_btn.input.useHandCursor = true;
         
@@ -77,6 +78,6 @@ function onInputUp(target) {
     game.add.tween(target.scale).to({x: 0.5, y: 0.5}, 100, Phaser.Easing.Cubic.Out, true);
     game.add.tween(target.my_txt.scale).to({x: 1, y: 1}, 100, Phaser.Easing.Cubic.Out, true);
     if(arguments[2]) {
-        game.state.start('Play');
+        game.state.start(target.my_state);
     }
 }

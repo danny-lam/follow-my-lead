@@ -172,7 +172,8 @@ function checkPlayerCombo(val, cnt){
         count = 0;
         level = 1;
         comboArray = [];
-        startCombo();
+        //startCombo();
+        game.state.start('GameOver');
     }
     
 }
