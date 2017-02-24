@@ -23,6 +23,14 @@ var btn_style = {
     align: "center",
     fontWeight: "bold"
 }
+var level_style = {
+    font: "200px Arial",
+    fill: "#ffffff",
+    wordWrap: true,
+    wordWrapWidth: 1000,
+    align: "center",
+    fontWeight: "bold"
+}
 
 var menu = {
     
