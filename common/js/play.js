@@ -6,6 +6,8 @@ var btnArray;
 var comboArray = [];
 var player;
 var totalBtn;
+var highScore = 0;
+var highScore_txt;
 
 var timer;
 var level = 1;
@@ -19,12 +21,20 @@ var play = {
     create: function() {
         
         bg = game.add.image(0, 0, 'background');
-        play_txt = game.add.text(gameX, (gameY/4), 'Level', style);
+
+        play_txt = game.add.text(gameX, (gameY/4+140), 'Level', style);
         play_txt.anchor.set(0.5);
         
         level_txt = game.add.text(gameX+30, (gameY/4+280), level, level_style);
         level_txt.anchor.set(0.5);
         
+        if (localStorage.getItem("followMyLeadHighScore") !== null) {
+            highScore = parseInt(localStorage.getItem("followMyLeadHighScore"));
+        }
+        
+        highScore_txt = game.add.text(gameX, 50, "Highscore: "+highScore, style);
+        highScore_txt.anchor.set(0.5);
+
         xMargin = 40;
         yMargin = 40;
         
@@ -153,6 +163,13 @@ function checkPlayerCombo(val, cnt){
         console.log("fout!");
         console.log("val = "+val+" | comboArray[cnt].value = "+comboArray[cnt].value);
         console.log("=====================================================================");
+        
+        if(level > highScore){
+            highScore = level;
+            localStorage.setItem("followMyLeadHighScore", highScore);
+            highScore_txt.setText("Highscore: "+highScore);
+        }
+
         count = 0;
         level = 1;
         comboArray = [];
