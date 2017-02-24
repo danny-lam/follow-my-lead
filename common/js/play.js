@@ -21,6 +21,7 @@ var play = {
     create: function() {
         
         bg = game.add.image(0, 0, 'background');
+
         play_txt = game.add.text(gameX, (gameY/4+140), 'Level', style);
         play_txt.anchor.set(0.5);
         
@@ -33,7 +34,7 @@ var play = {
         
         highScore_txt = game.add.text(gameX, 50, "Highscore: "+highScore, style);
         highScore_txt.anchor.set(0.5);
-        
+
         xMargin = 40;
         yMargin = 40;
         
@@ -168,7 +169,7 @@ function checkPlayerCombo(val, cnt){
             localStorage.setItem("followMyLeadHighScore", highScore);
             highScore_txt.setText("Highscore: "+highScore);
         }
-        
+
         count = 0;
         level = 1;
         comboArray = [];
