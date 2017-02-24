@@ -11,7 +11,7 @@ var preload = {
     
     preload: function() {
         
-        game.load.image("background", "common/img/bg.jpg");
+        game.load.image("background", "common/img/bg.png");
         game.load.image("circle", "common/img/circle.png");
         game.load.image("cross", "common/img/cross.png");
         game.load.image("triangle", "common/img/triangle.png");
