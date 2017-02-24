@@ -3,23 +3,27 @@ var finish_btn;
 var btn1, btn2, btn3, btn4;
 var xMargin, yMargin;
 var btnArray;
-var comboArray;
+var comboArray = [];
+var player;
 var totalBtn;
 
 var timer;
-var level = 0;
+var level = 1;
+var level_txt;
+var count = 0;
+
+var t1;
 
 var play = {
     
     create: function() {
         
         bg = game.add.image(0, 0, 'background');
-        play_txt = game.add.text(gameX, (gameY/4), 'End this game', style);
+        play_txt = game.add.text(gameX, (gameY/4), 'Level', style);
         play_txt.anchor.set(0.5);
         
-        timer = game.time.create(false);
-        timer.loop(500, followMyLead, this);
-        timer.start();
+        level_txt = game.add.text(gameX+30, (gameY/4+280), level, level_style);
+        level_txt.anchor.set(0.5);
         
         xMargin = 40;
         yMargin = 40;
@@ -64,6 +68,9 @@ var play = {
         btn4.events.onInputDown.add(pressThis, this);
         btn4.events.onInputUp.add(releaseThis, this);
         
+        btnArray = [btn1, btn2, btn3, btn4];
+        
+        startCombo();
     },
     
     update: function() {
@@ -88,12 +95,88 @@ function releaseThis(target) {
     target.alpha = 0.5;
     if(arguments[2]) {
         console.log(target.value);
+        checkPlayerCombo(target.value, count);
     }
 }
 
 
-function followMyLead(){
+function startCombo(){
+    btn1.inputEnabled = false;
+    btn2.inputEnabled = false;
+    btn3.inputEnabled = false;
+    btn4.inputEnabled = false;
     
+    level_txt.setText(level);
+    //comboArray.push(btnArray[0]);
+    //add to combo
+    var i = Math.floor(Math.random()*4);
+    console.log("i = "+i);
+    comboArray.push(btnArray[i]);
     
+    timer = game.time.create(false);
+    timer.loop(1000, animateCombo, this);
+    timer.start();
+
+}
+
+function animateCombo(){
+    
+    console.log("comboArray.length = "+ comboArray.length);
+    console.log("level = "+ level);
+    
+    if(count < comboArray.length){
+        console.log("animate button "+count);
+        
+        t1 = game.add.tween(comboArray[count].scale).to({x: 0.5, y: 0.5}, 200, Phaser.Easing.Cubic.Out, true);
+        t1.onComplete.add(animateBack, this);
+        comboArray[count].alpha = 1;
+        
+        
+        
+        
+    }
+}
+
+function checkPlayerCombo(val, cnt){
+    
+    if(val == comboArray[cnt].value){
+        console.log("goed! val = "+val);
+        console.log("comboArray[cnt].value = "+comboArray[cnt].value);
+        count++;
+        if(comboArray.length == count){
+            console.log("max gehaald ga naar next level!");
+            count = 0;
+            level++;
+            startCombo();
+        }
+    }else{
+        console.log("fout!");
+        console.log("val = "+val+" | comboArray[cnt].value = "+comboArray[cnt].value);
+        console.log("=====================================================================");
+        count = 0;
+        level = 1;
+        comboArray = [];
+        startCombo();
+    }
+    
+}
+
+function animateBack(){
+    
+    game.add.tween(comboArray[count].scale).to({x: 0.6, y: 0.6}, 200, Phaser.Easing.Cubic.Out, true);
+    comboArray[count].alpha = 0.5;
+    
+    count++;
+        if(count == comboArray.length){
+            console.log("stop ");
+            timer.pause();
+            timer.destroy();
+            
+            count = 0;
+            btn1.inputEnabled = true;
+            btn2.inputEnabled = true;
+            btn3.inputEnabled = true;
+            btn4.inputEnabled = true;
+        }
     
 }
