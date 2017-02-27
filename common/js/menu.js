@@ -54,6 +54,7 @@ var menu = {
         start_btn_txt.anchor.set(0.5);
         start_btn.my_txt = start_btn_txt; //link this txt to this btn
         start_btn.my_state = 'Play';
+
         
         start_btn.input.useHandCursor = true;
         
