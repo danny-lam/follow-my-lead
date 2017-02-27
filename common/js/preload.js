@@ -6,6 +6,7 @@ var loadingStyle = {
     align: "center",
     fontWeight: "bold"
 }
+var imgArray = [];
 
 var preload = {
     
@@ -19,7 +20,7 @@ var preload = {
         game.load.image("menu", "common/img/menu-icon.png");
         game.load.image("button", "common/img/main-button.png");
         
-        
+        imgArray = ["square", "triangle", "cross", "circle"];
         
         var loading_txt = game.add.text(game.world.centerX, game.world.centerY, 'loading...', loadingStyle);
         loading_txt.anchor.set(0.5);

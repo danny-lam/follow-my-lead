@@ -80,6 +80,7 @@ var play = {
         
         btnArray = [btn1, btn2, btn3, btn4];
         
+        level = 1;
         startCombo();
     },
     
@@ -117,6 +118,7 @@ function startCombo(){
     btn4.inputEnabled = false;
     
     level_txt.setText(level);
+    animateThis(level_txt, 0);
     //comboArray.push(btnArray[0]);
     //add to combo
     var i = Math.floor(Math.random()*4);
@@ -164,14 +166,14 @@ function checkPlayerCombo(val, cnt){
         console.log("val = "+val+" | comboArray[cnt].value = "+comboArray[cnt].value);
         console.log("=====================================================================");
         
-        if(level > highScore){
-            highScore = level;
-            localStorage.setItem("followMyLeadHighScore", highScore);
-            highScore_txt.setText("Highscore: "+highScore);
-        }
+//        if(level > highScore){
+//            highScore = level;
+//            localStorage.setItem("followMyLeadHighScore", highScore);
+//            highScore_txt.setText("Highscore: "+highScore);
+//        }
         
         count = 0;
-        level = 1;
+        //level = 1;
         comboArray = [];
         //startCombo();
         game.state.start('GameOver');
