@@ -24,6 +24,8 @@ var gameOver = {
             highScore_txt.setText("Highscore: "+highScore);
             
             text1 = "A new highscore!\n";
+        }else{
+            text1 = "";
         }
         
         game_over_desc = game.add.text(gameX, (gameY/4+140), (text1+'You reached level '+level), style);

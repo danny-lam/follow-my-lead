@@ -15,6 +15,7 @@ var level_txt;
 var count = 0;
 
 var t1;
+var bleep1;
 
 var play = {
     
@@ -38,6 +39,7 @@ var play = {
         xMargin = 40;
         yMargin = 40;
         
+        bleep1 = game.add.audio('bleep1');
         btn1 = game.add.sprite(gameW/4-xMargin, (gameH/4*3+yMargin), 'square');
         btn1.anchor.set(0.5);
         btn1.scale.set(0.6);
@@ -45,9 +47,11 @@ var play = {
         btn1.value = 1;
         btn1.inputEnabled = true;
         btn1.input.useHandCursor = true;
+        btn1.snd = bleep1;
         btn1.events.onInputDown.add(pressThis, this);
         btn1.events.onInputUp.add(releaseThis, this);
         
+        bleep2 = game.add.audio('bleep2');
         btn2 = game.add.sprite(gameW/2, (gameH/4*3-140+yMargin), 'triangle');
         btn2.anchor.set(0.5);
         btn2.scale.set(0.6);
@@ -55,9 +59,11 @@ var play = {
         btn2.value = 2;
         btn2.inputEnabled = true;
         btn2.input.useHandCursor = true;
+        btn2.snd = bleep2;
         btn2.events.onInputDown.add(pressThis, this);
         btn2.events.onInputUp.add(releaseThis, this);
         
+        bleep3 = game.add.audio('bleep3');
         btn3 = game.add.sprite(gameW/2, (gameH/4*3+140+yMargin), 'cross');
         btn3.anchor.set(0.5);
         btn3.scale.set(0.6);
@@ -65,9 +71,11 @@ var play = {
         btn3.value = 3;
         btn3.inputEnabled = true;
         btn3.input.useHandCursor = true;
+        btn3.snd = bleep3;
         btn3.events.onInputDown.add(pressThis, this);
         btn3.events.onInputUp.add(releaseThis, this);
         
+        bleep4 = game.add.audio('bleep4');
         btn4 = game.add.sprite((gameW/4*3+xMargin), (gameH/4*3+yMargin), 'circle');
         btn4.anchor.set(0.5);
         btn4.scale.set(0.6);
@@ -75,10 +83,13 @@ var play = {
         btn4.value = 4;
         btn4.inputEnabled = true;
         btn4.input.useHandCursor = true;
+        btn4.snd = bleep4;
         btn4.events.onInputDown.add(pressThis, this);
         btn4.events.onInputUp.add(releaseThis, this);
         
         btnArray = [btn1, btn2, btn3, btn4];
+        
+        game.sound.setDecodedCallback([ bleep1 ], soundsReady, this);
         
         level = 1;
         startCombo();
@@ -87,6 +98,10 @@ var play = {
     update: function() {
         
     }
+    
+}
+
+function soundsReady(){
     
 }
 
@@ -99,6 +114,7 @@ function finishGame() {
 function pressThis(target) {    
     game.add.tween(target.scale).to({x: 0.5, y: 0.5}, 100, Phaser.Easing.Cubic.Out, true);
     target.alpha = 1;
+    target.snd.play();
 }
 function releaseThis(target) {
     //console.log('button up', arguments);
@@ -126,7 +142,7 @@ function startCombo(){
     comboArray.push(btnArray[i]);
     
     timer = game.time.create(false);
-    timer.loop(1000, animateCombo, this);
+    timer.loop(500, animateCombo, this);
     timer.start();
 
 }
@@ -143,6 +159,7 @@ function animateCombo(){
         t1.onComplete.add(animateBack, this);
         comboArray[count].alpha = 1;
         
+        comboArray[count].snd.play();
         
         
         
