@@ -22,6 +22,11 @@ var preload = {
         
         imgArray = ["square", "triangle", "cross", "circle"];
         
+        game.load.audio('bleep1', 'common/snd/sound1.wav');
+        game.load.audio('bleep2', 'common/snd/sound2.wav');
+        game.load.audio('bleep3', 'common/snd/sound3.wav');
+        game.load.audio('bleep4', 'common/snd/sound4.wav');
+        
         var loading_txt = game.add.text(game.world.centerX, game.world.centerY, 'loading...', loadingStyle);
         loading_txt.anchor.set(0.5);
         
