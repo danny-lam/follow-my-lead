@@ -2,10 +2,6 @@ var bg;
 var title_txt;
 var start_btn;
 var start_btn_txt;
-var gameX;
-var gameY;
-var gameW;
-var gameH;
 
 var timer;
 var figArray = [];
@@ -40,10 +36,7 @@ var menu = {
     
     create: function() {
         
-        gameX = game.world.centerX;
-        gameY = game.world.centerY;
-        gameW = game.world.width;
-        gameH = game.world.height;
+        
         
         bg = game.add.image(0, 0, 'background');
         title_txt = game.add.text(gameX, (gameY/4), 'Follow my Lead', style);
@@ -60,15 +53,11 @@ var menu = {
         start_btn.scale.set(0.5);
         start_btn.inputEnabled = true;
         start_btn.anchor.set(0.5);
-       
         start_btn_txt = game.add.text((gameX+5), (gameH-280+3), 'START', btn_style);
         start_btn_txt.anchor.set(0.5);
         start_btn.my_txt = start_btn_txt; //link this txt to this btn
         start_btn.my_state = 'Play';
-
-        
         start_btn.input.useHandCursor = true;
-        
         start_btn.events.onInputDown.add(onInputDown, this);
         start_btn.events.onInputUp.add(onInputUp, this);
         
@@ -81,11 +70,7 @@ var menu = {
     
 }
 
-function startGame() {
-    
-    //game.state.start('Play');
-    
-}
+
 
 function onInputDown(target) {    
     game.add.tween(target.scale).to({x: 0.4, y: 0.4}, 100, Phaser.Easing.Cubic.Out, true);
