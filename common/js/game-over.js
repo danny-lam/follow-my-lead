@@ -8,6 +8,7 @@ var home_txt;
 
 var text1 = "";
 var text2;
+var game_over_snd;
 
 var gameOver = {
     
@@ -32,12 +33,12 @@ var gameOver = {
         //game_over_desc.anchor.set(0.5);
         game_over_desc.anchor.setTo(0.5, 0);
         
-        restart_btn = game.add.sprite(gameX, gameY, 'button');
+        restart_btn = game.add.sprite(gameX, 800, 'button');
         restart_btn.scale.set(0.5);
         restart_btn.inputEnabled = true;
         restart_btn.anchor.set(0.5);
-       
-        restart_txt = game.add.text((gameX+5), (gameY+3), 'PLAY AGAIN', btn_style);
+        
+        restart_txt = game.add.text((gameX+5), 800, 'PLAY AGAIN', style);
         restart_txt.anchor.set(0.5);
         restart_btn.my_txt = restart_txt; //link this txt to this btn
         restart_btn.my_state = 'Play';
@@ -46,12 +47,12 @@ var gameOver = {
         restart_btn.events.onInputDown.add(onInputDown, this);
         restart_btn.events.onInputUp.add(onInputUp, this);
         
-        home_btn = game.add.sprite(gameX, gameY+140, 'button');
+        home_btn = game.add.sprite(gameX, 900, 'button');
         home_btn.scale.set(0.5);
         home_btn.inputEnabled = true;
         home_btn.anchor.set(0.5);
        
-        home_txt = game.add.text((gameX+5), (gameY+3+140), 'HOME', btn_style);
+        home_txt = game.add.text((gameX+5), 900, 'HOME', style);
         home_txt.anchor.set(0.5);
         home_btn.my_txt = home_txt; //link this txt to this btn
         home_btn.my_state = 'Menu';
@@ -66,6 +67,12 @@ var gameOver = {
         animateThis(restart_txt, 900);
         animateThis(home_btn, 1100);
         animateThis(home_txt, 1100);
+        
+        if(music.enabled){
+            game_over_snd = game.add.audio('game-over');
+            game_over_snd.play();
+        }
+        
     }
     
 }
