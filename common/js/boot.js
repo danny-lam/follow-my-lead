@@ -1,5 +1,3 @@
-
-
 var boot = {
     
     preload: function() {
@@ -16,26 +14,17 @@ var boot = {
         }
         game.scale.refresh();
         
+        game.load.image("fort", "common/img/walkingfort_white_text.png");
+        game.load.image("background", "common/img/background.jpg");
     },
     
     create: function() {
         
         //game.input.onDown.add(gofull, this);
-        
-        
         game.state.start("Preload");
     }
     
 }
-//
-//function gofull() {
-//    if (game.scale.isFullScreen) {
-//        game.scale.stopFullScreen();
-//    } else {
-//        game.scale.startFullScreen(false);
-//        game.input.onDown.remove(gofull, this);
-//    }
-//}
 
 function handleIncorrect(){
     if(!game.device.desktop){
